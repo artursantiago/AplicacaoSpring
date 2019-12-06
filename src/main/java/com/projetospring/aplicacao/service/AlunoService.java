@@ -39,16 +39,17 @@ public class AlunoService {
 	 * Retorna o numero de alunos no banco com a
 	 * matricula especificada
 	 */
-	public int countByMatricula(String matricula) {
-		return repository.finfAlunoByMatricula(matricula);
+	public int countByMatriculaAndId(String matricula, long id) {
+		return repository.countAlunoByMatriculaAndId(matricula, id);
 	}
 	
 	/**
-	 * Retorna o aluno do banco com a
-	 * matricula especificada
+	 * 
+	 * @param matricula
+	 * @return
 	 */
-	public long findIdByMatricula(String matricula) {
-		return repository.findIdByMatricula(matricula);
+	public int countByMatricula(String matricula) {
+		return repository.countAlunoByMatricula(matricula);
 	}
 	
 	/**
@@ -81,14 +82,13 @@ public class AlunoService {
 	 */
 	private void validaAlunoNoBanco(Aluno aluno) throws NegocioException {
 		//valida se um aluno tem uma matricula de outro aluno já presente no banco de dados
-		//if((countByMatricula(aluno.getMatricula()) == 1) && (aluno.getId() == 0 )) {
-		//		throw new  NegocioException("Já existe um aluno com essa matrícula.");
-		//}
-		if(countByMatricula(aluno.getMatricula()) == 1) { 
-			if(aluno.getId() == 0) { 
+		if(aluno.getId() == 0) {
+			if(countByMatricula(aluno.getMatricula()) == 1) { 
 				throw new  NegocioException("Já existe um aluno com essa matrícula.");
 			}
-			else if(findIdByMatricula(aluno.getMatricula()) != aluno.getId()) { 
+		}
+		else { 
+			if(countByMatriculaAndId(aluno.getMatricula(), aluno.getId()) == 1) { 
 				throw new  NegocioException("Já existe um aluno com essa matrícula.");
 			}
 		}
