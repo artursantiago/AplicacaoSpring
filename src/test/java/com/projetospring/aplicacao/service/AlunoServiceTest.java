@@ -3,7 +3,6 @@ package com.projetospring.aplicacao.service;
 import static org.mockito.Mockito.when;  //é necessário que seja static
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
