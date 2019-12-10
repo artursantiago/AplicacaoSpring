@@ -3,6 +3,8 @@ package com.projetospring.aplicacao.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,26 +38,34 @@ public class AlunoController {
 	 * Método que salva um novo aluno no banco de dados
 	 */
 	@PostMapping("/formulario")
-	public Aluno save(@RequestBody Aluno aluno) {
+	public ResponseEntity<Aluno> save(@RequestBody Aluno aluno) {
 		try {
-			service.save(aluno);
+			Aluno alunoSalvo = service.save(aluno);
+			return new ResponseEntity<Aluno>(alunoSalvo, HttpStatus.CREATED);
 		} catch (NegocioException e) {
 			//mostra mensgem de erro
+			return ResponseEntity.badRequest().build();
+		}catch(IllegalArgumentException e) {
+			
+			return ResponseEntity.badRequest().build();
 		}
-		return aluno; 
 	}
 	
 	/**
 	 * Método que atualiza os dados do aluno no banco de dados.
 	 */
 	@PutMapping("/formulario")
-	public Aluno update(@RequestBody Aluno aluno) {
+	public ResponseEntity<Aluno> update(@RequestBody Aluno aluno) {
 		try {
-			service.save(aluno);
+			Aluno alunoSalvo = service.save(aluno);
+			return new ResponseEntity<Aluno>(alunoSalvo, HttpStatus.CREATED);
 		} catch (NegocioException e) {
 			//mostra mensgem de erro
+			return ResponseEntity.badRequest().build();
+		}catch(IllegalArgumentException e) {
+			
+			return ResponseEntity.badRequest().build();
 		}
-		return aluno; 
 	}
 	
 	/**
@@ -67,21 +77,13 @@ public class AlunoController {
 	}
 	 
 	@GetMapping("/listagem/{id}")
-	public Aluno findAlunoById(@PathVariable("id") long id) {
+	public ResponseEntity<Aluno> findAlunoById(@PathVariable long id) {
 		try {
-			return service.findById(id);
+			return ResponseEntity.ok(service.findById(id));
 		} catch (NegocioException e) {
-			// mostra mensagem de erro
-			return null;
+			System.out.println("bbbbbbbbbbbbbbbbbbbbbb");
+//			log.error(e.getMessage());
+			return ResponseEntity.badRequest().build();
 		}
 	}
-	
-	/**
-	 Função para chamar a pagina de cadastro
-	 */
-	
-	
-	/**
-	 função para chamar a página de listagem 
-	 */
 }
