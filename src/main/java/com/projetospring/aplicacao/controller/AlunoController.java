@@ -38,16 +38,14 @@ public class AlunoController {
 	 * Método que salva um novo aluno no banco de dados
 	 */
 	@PostMapping("/formulario")
-	public ResponseEntity<Aluno> save(@RequestBody Aluno aluno) {
+	public ResponseEntity<String> save(@RequestBody Aluno aluno) {
 		try {
-			Aluno alunoSalvo = service.save(aluno);
-			return new ResponseEntity<Aluno>(alunoSalvo, HttpStatus.CREATED);
+			service.save(aluno);
+			return new ResponseEntity<>("O aluno foi salvo com sucesso.", HttpStatus.OK);
 		} catch (NegocioException e) {
-			//mostra mensgem de erro
-			return ResponseEntity.badRequest().build();
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}catch(IllegalArgumentException e) {
-			
-			return ResponseEntity.badRequest().build();
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -55,16 +53,14 @@ public class AlunoController {
 	 * Método que atualiza os dados do aluno no banco de dados.
 	 */
 	@PutMapping("/formulario")
-	public ResponseEntity<Aluno> update(@RequestBody Aluno aluno) {
+	public ResponseEntity<String> update(@RequestBody Aluno aluno) {
 		try {
-			Aluno alunoSalvo = service.save(aluno);
-			return new ResponseEntity<Aluno>(alunoSalvo, HttpStatus.CREATED);
+			service.save(aluno);
+			return new ResponseEntity<>("O aluno foi salvo com sucesso.", HttpStatus.OK);
 		} catch (NegocioException e) {
-			//mostra mensgem de erro
-			return ResponseEntity.badRequest().build();
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 		}catch(IllegalArgumentException e) {
-			
-			return ResponseEntity.badRequest().build();
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
 	
@@ -79,11 +75,9 @@ public class AlunoController {
 	@GetMapping("/listagem/{id}")
 	public ResponseEntity<Aluno> findAlunoById(@PathVariable long id) {
 		try {
-			return ResponseEntity.ok(service.findById(id));
+			return new ResponseEntity<>(service.findById(id), HttpStatus.OK);
 		} catch (NegocioException e) {
-			System.out.println("bbbbbbbbbbbbbbbbbbbbbb");
-//			log.error(e.getMessage());
-			return ResponseEntity.badRequest().build();
+			return ResponseEntity.notFound().build();
 		}
 	}
 }
