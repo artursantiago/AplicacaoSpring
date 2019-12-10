@@ -18,6 +18,9 @@ import com.projetospring.aplicacao.entities.Aluno;
 import com.projetospring.aplicacao.exceptions.NegocioException;
 import com.projetospring.aplicacao.service.AlunoService;
 
+/**
+ *A anotação CrossOrigin permite requisições vindas de origens diferentes
+ */
 @CrossOrigin(origins = "http://localhost:8081")
 @RestController
 public class AlunoController {
@@ -29,13 +32,13 @@ public class AlunoController {
 	 * Método que retorna a lista de todos os alunos do banco de dados
 	 */
 	@GetMapping("/listagem")
-	public List<Aluno> findAll() {
-		return service.findAll();
+	public ResponseEntity<List<Aluno>> findAll() {
+		return new ResponseEntity<>(service.findAll(), HttpStatus.OK);
 	}
-	
 	
 	/**
 	 * Método que salva um novo aluno no banco de dados
+	 * e retorna um "entidade de resposta" para o vue
 	 */
 	@PostMapping("/formulario")
 	public ResponseEntity<String> save(@RequestBody Aluno aluno) {
@@ -50,7 +53,8 @@ public class AlunoController {
 	}
 	
 	/**
-	 * Método que atualiza os dados do aluno no banco de dados.
+	 * Método que atualiza os dados do aluno no banco de dados
+	 * e retorna um "entidade de resposta" para o vue.
 	 */
 	@PutMapping("/formulario")
 	public ResponseEntity<String> update(@RequestBody Aluno aluno) {
@@ -71,7 +75,10 @@ public class AlunoController {
 	public void delete(@PathVariable("id") long id) { 
 		service.deleteById(id);
 	}
-	 
+	
+	/**
+	 * Método que retorna um aluno com a id especificado.
+	 */
 	@GetMapping("/listagem/{id}")
 	public ResponseEntity<Aluno> findAlunoById(@PathVariable long id) {
 		try {

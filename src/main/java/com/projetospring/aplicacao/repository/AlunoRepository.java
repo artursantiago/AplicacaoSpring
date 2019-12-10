@@ -6,6 +6,9 @@ import org.springframework.stereotype.Repository;
 
 import com.projetospring.aplicacao.entities.Aluno;
 
+/**
+ *Classe responsável pela relação com o banco de dados.
+ */
 @Repository
 public interface AlunoRepository extends JpaRepository<Aluno, Long>{
 	
