@@ -50,7 +50,7 @@ public class AlunoServiceTest {
 		
 		when(repository.countAlunoByMatricula(aluno.getMatricula())).thenReturn(0);
 		
-		service.save(aluno);
+		org.junit.Assert.assertNotNull( service.save(aluno) );
 	}
 	
 	/**
@@ -66,9 +66,9 @@ public class AlunoServiceTest {
 		aluno.getPessoa().setName("Artur");
 		aluno.getPessoa().setId(1);
 		
-		when(repository.countAlunoByMatriculaAndId(aluno.getMatricula(), aluno.getId())).thenReturn(0);
+		when(repository.countAlunoByMatricula(aluno.getMatricula(), aluno.getId())).thenReturn(0);
 		
-		service.save(aluno);
+		org.junit.Assert.assertEquals(aluno.getPessoa().getName()+"(Editado)", service.save(aluno).getPessoa().getName() );
 	}
 	
 	////////Testes Matrículas/////////
@@ -102,7 +102,7 @@ public class AlunoServiceTest {
 		aluno.getPessoa().setId(2);
 		aluno.getPessoa().setName("Lucas");
 		
-		when(repository.countAlunoByMatriculaAndId(aluno.getMatricula(), aluno.getId())).thenReturn(1);
+		when(repository.countAlunoByMatricula(aluno.getMatricula(), aluno.getId())).thenReturn(1);
 		
 		exception.expect(NegocioException.class);
 		exception.expectMessage("Já existe um aluno com essa matrícula.");

@@ -5,11 +5,15 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.projetospring.aplicacao.entities.Aluno;
 import com.projetospring.aplicacao.exceptions.NegocioException;
 import com.projetospring.aplicacao.repository.AlunoRepository;
 
+/**
+ * Classe responsável pelas regras de negócio da aplicação.
+ */
 @Service
 public class AlunoService {
 	
@@ -37,16 +41,15 @@ public class AlunoService {
 	
 	/**
 	 * Retorna o numero de alunos no banco com a
-	 * matricula especificada
+	 * matricula  e id especificados
 	 */
-	public int countByMatriculaAndId(String matricula, long id) {
-		return repository.countAlunoByMatriculaAndId(matricula, id);
+	public int countByMatricula(String matricula, long id) {
+		return repository.countAlunoByMatricula(matricula, id);
 	}
 	
 	/**
-	 * 
-	 * @param matricula
-	 * @return
+	 * Retorna o número de alunos no banco com apenas
+	 * a matrícula específicada
 	 */
 	public int countByMatricula(String matricula) {
 		return repository.countAlunoByMatricula(matricula);
@@ -55,10 +58,18 @@ public class AlunoService {
 	/**
 	 * Método que persiste o aluno especificado e o retorna-o.
 	 */
+	@Transactional
 	public Aluno save(Aluno aluno) throws NegocioException{
 		aluno.validar();
+		
+		if(aluno.getId() > 0) { // editando
+			// ao editar um aluno, concatenar ao seu nome a palavra "(Editado)"
+			aluno.getPessoa().setName( aluno.getPessoa().getName() + "(Editado)" );
+		}
+		
 		validaAlunoNoBanco(aluno);
-		return repository.save(aluno);
+		repository.save(aluno);
+		return aluno;
 	}
 	
 	/**
@@ -81,14 +92,13 @@ public class AlunoService {
 	 * com a mesma matrícula no banco de dados.
 	 */
 	private void validaAlunoNoBanco(Aluno aluno) throws NegocioException {
-		//valida se um aluno tem uma matricula de outro aluno já presente no banco de dados
 		if(aluno.getId() == 0) {
 			if(countByMatricula(aluno.getMatricula()) == 1) { 
 				throw new  NegocioException("Já existe um aluno com essa matrícula.");
 			}
 		}
 		else { 
-			if(countByMatriculaAndId(aluno.getMatricula(), aluno.getId()) == 1) { 
+			if(countByMatricula(aluno.getMatricula(), aluno.getId()) == 1) { 
 				throw new  NegocioException("Já existe um aluno com essa matrícula.");
 			}
 		}
