@@ -1,4 +1,4 @@
-# front-vue
+# Frontend
 
 https://www.springboottutorial.com/spring-boot-vue-full-stack-crud-maven-application
 https://www.itsolutionstuff.com/post/vue-axios-post-request-exampleexample.html
