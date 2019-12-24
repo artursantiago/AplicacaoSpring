@@ -1,7 +1,7 @@
 # Backend
 
 ## Banco de dados
-O projeto utiliza o PostgreSQL como base de dados, caso não tenha-o instalado baixe-o <a href"https://www.postgresql.org/download/">aqui</a>.
+O projeto utiliza o PostgreSQL como base de dados, caso não tenha-o instalado baixe-o <a href="https://www.postgresql.org/download/">aqui</a>.
 
 Para gerar a base de dados rode os scripts ...
 
