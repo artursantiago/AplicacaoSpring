@@ -8,6 +8,6 @@ Para gerar a base de dados rode os scripts ...
 ## Como compilar
 Para compilar o projeto rode as seguintes tags:
 * **Clean**
-* **BootRun***
+* **BootRun**
 
 O projeto subirá na porta 8080 automaticamente.
