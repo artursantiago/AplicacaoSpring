@@ -1,31 +1,23 @@
 # Frontend
 
-https://www.springboottutorial.com/spring-boot-vue-full-stack-crud-maven-application
-https://www.itsolutionstuff.com/post/vue-axios-post-request-exampleexample.html
-https://alligator.io/vuejs/rest-api-axios/
-https://eslint.org/docs/rules/no-unused-vars
-https://spring.io/guides/gs/rest-service-cors/
 
-
-## Project setup
+## Como configurar 
+Para configurar e instalar as dependências da view, pode usar o seguinte comando:
 ```
 npm install
 ```
+*Obs*: Caso não tenha o npm instalado, pode instalar através dos aquivos .tar <a href="https://nodejs.org/pt-br/">aqui</a>. Ou então via linha de comando no linux ou mac usando `sudo apt get install npm`.
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## Como Compilar
 
-### Compiles and minifies for production
+Para compilar e subir a aplicação digite o seguinte comando:
 ```
-npm run build
+npm run serve -- --port 8081
 ```
+A view subirá na porta 8081, pois a porta 8080 estará sendo usada pelo backend.
 
-### Lints and fixes files
-```
-npm run lint
-```
+## Como acessar
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+O projeto possui 2 caminhos de acesso:
+* localhost:8081/listagem
+* localhost:8081/formulario
