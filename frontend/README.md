@@ -19,6 +19,6 @@ A view subirá na porta 8081, pois a porta 8080 estará sendo usada pelo backend
 ## Como acessar
 
 O projeto possui 2 caminhos de acesso:
-* *localhost:8081/listagem* Página de listagem dos alunos.
+* **localhost:8081/listagem** Página de listagem dos alunos.
 
-* *localhost:8081/formulario*  Página de cadastro de alunos.
+* **localhost:8081/formulario**  Página de cadastro de alunos.
