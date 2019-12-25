@@ -11,9 +11,12 @@ Para gerar o banco de dados usado na aplicação use <a href="https://github.com
 ## Importando os projetos Java do Back-end
 
 Importe o backend como um projeto gradle para o workspace do Eclipse.
+
 <img width="50%" src="https://user-images.githubusercontent.com/47838241/71448289-d2f21400-2718-11ea-9616-4b69f5e47e32.png">
 
+
 O projeto deverá aparecer dessa forma na IDE:
+
 <img src="https://user-images.githubusercontent.com/47838241/71448396-15682080-271a-11ea-96c5-c9f0e72fab16.png">
 
 ## Como compilar
